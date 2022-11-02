@@ -24,7 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
               // print('tokenya==$token');
               Session.getExpired().then((expired) {
                 var today = DateTime.now();
-                if(today.hour < expired!){
+                if(today.hour < int.parse(expired!)){
                   print('token belum expired');
                   context.read<PageBloc>().add(GoToGetDestinationData(token: token));
                   // var check = await NotesDatabase.instance.tableIsEmpty();
@@ -35,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen> {
                 }
               });
             } else {
-              context.read<PageBloc>().add(GoToLogin());
+              context.read<PageBloc>().add(GoToLoginFirst());
             }
           });
 

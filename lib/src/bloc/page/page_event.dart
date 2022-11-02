@@ -13,6 +13,8 @@ class GoToOnboardingPage extends PageEvent {}
 
 class GoToLogin extends PageEvent {}
 
+class GoToLoginFirst extends PageEvent {}
+
 class GoToMainPage extends PageEvent {}
 
 class GoToGetDestinationData extends PageEvent {

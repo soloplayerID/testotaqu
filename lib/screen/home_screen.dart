@@ -20,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
+    print('test');
 
     refreshHistory();
   }
@@ -40,12 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
       child: isLoading
           ? const CircularProgressIndicator()
-          : history!.isEmpty
-              ? const Text(
-                  'No History',
-                  style: TextStyle(color: Colors.grey, fontSize: 24),
-                )
-        : Column(
+          : Column(
           children: [
             //app bar
             Padding(
@@ -272,7 +268,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       Container(
                         height: 80,
-                        child: ListView.builder(
+                        child: history!.isEmpty
+                                  ? const Text(
+                                      'No History',
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 24),
+                                    )
+                                  : ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemCount: history!.length,
                             itemBuilder: (context, index) {
