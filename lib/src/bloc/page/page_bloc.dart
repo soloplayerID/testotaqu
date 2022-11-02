@@ -34,40 +34,60 @@ class PageBloc extends Bloc<PageEvent, PageState> {
 
 
           var check = await DestinationDatabase.instance.tableIsEmpty();
-      if(check! == 0){
-      print('token adalah ${value.data!.accessToken.toString()}');
-      print(check);
-        await _destinationServices.getDestination(value.data!.accessToken.toString()).then((value) async {
-          for (var element in value.data!) { 
-            final destination = Destination(
-              id: element.destinationId,
-              typeSource: element.typeSource.toString(),
-              typeName: element.typeName.toString(),
-              name: element.name.toString(),
-              packetTypeId: element.packageTypeId!,
-            );
-            await DestinationDatabase.instance.create(destination);
+          if(check! == 0){
+          print('token adalah ${value.data!.accessToken.toString()}');
+          print(check);
+            await _destinationServices.getDestination(value.data!.accessToken.toString()).then((value) async {
+              for (var element in value.data!) { 
+                final destination = Destination(
+                  id: element.destinationId,
+                  typeSource: element.typeSource.toString(),
+                  typeName: element.typeName.toString(),
+                  name: element.name.toString(),
+                  packetTypeId: element.packageTypeId!,
+                );
+                await DestinationDatabase.instance.create(destination);
+              }
+            });
+            emit(OnMainPage());
+          }else{
+            print('data destination sudah ada');
+            emit(OnMainPage());
           }
-        });
-        emit(OnMainPage());
-      }else{
-        print('data destination sudah ada');
-        emit(OnMainPage());
-      }
         }).catchError((err) {
           emit(OnLoginError(err.toString()));
         });
 
     } else if (event is GoToLoginFirst) {
         print('onlogin');
-        await _authServices.login('otaqu', 'qwerty').then((value) {
+        await _authServices.login('otaqu', 'qwerty').then((value) async {
           print('tokennya adalah==== ${value.data!.accessToken}');
           var today = DateTime.now();
           var expiredFromNow = today.add(const Duration(hours: 1));
           print(expiredFromNow.hour);
           Session.setId(value.data!.accessToken.toString());
           Session.setExpired(expiredFromNow.hour.toString());
-
+          var check = await DestinationDatabase.instance.tableIsEmpty();
+          if(check! == 0){
+          print('token adalah ${value.data!.accessToken.toString()}');
+          print(check);
+            await _destinationServices.getDestination(value.data!.accessToken.toString()).then((value) async {
+              for (var element in value.data!) { 
+                final destination = Destination(
+                  id: element.destinationId,
+                  typeSource: element.typeSource.toString(),
+                  typeName: element.typeName.toString(),
+                  name: element.name.toString(),
+                  packetTypeId: element.packageTypeId!,
+                );
+                await DestinationDatabase.instance.create(destination);
+              }
+            });
+            emit(OnMainPage());
+          }else{
+            print('data destination sudah ada');
+            emit(OnMainPage());
+          }
           
         }).catchError((err) {
           emit(OnLoginError(err.toString()));
