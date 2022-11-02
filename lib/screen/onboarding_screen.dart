@@ -21,7 +21,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     print("Shared pref called");
 
     Session.setOnboard('1');
-    context.read<PageBloc>().add(GoToMainPage());
+    context.read<PageBloc>().add(GoToLoginFirst());
   }
 
   @override

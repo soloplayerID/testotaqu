@@ -116,6 +116,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       }
 
     } else if(event is GoToOnboardingPage) {
+      
       emit(OnBoardingPage());
     } else if (event is GoToMainPage) {
       emit(OnMainPage());
