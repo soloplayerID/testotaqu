@@ -96,7 +96,7 @@ class FullScreenSearchModal extends ModalRoute {
                             // print('tokenya==$token');
                             Session.getExpired().then((expired) {
                               var today = DateTime.now();
-                              if (today.hour < int.parse(expired!)) {
+                              if (today.hour < expired!) {
                                 print('token belum expired');
                                 Navigator.of(context).pop();
                                 context

@@ -14,9 +14,9 @@ class Session {
     prefs.setString(keyAccessToken, value);
   }
 
-  static void setExpired(String value) async {
+  static void setExpired(int value) async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString(expired, value);
+    prefs.setInt(expired, value);
   }
 
   static void setName(String value) async {
@@ -45,9 +45,9 @@ class Session {
     return prefs.getString(onBoard);
   }
 
-  static Future<String?> getExpired() async {
+  static Future<int?> getExpired() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    return prefs.getString(expired);
+    return prefs.getInt(expired);
   }
 
   // remove

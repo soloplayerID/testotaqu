@@ -30,7 +30,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
       var expiredFromNow = today.add(const Duration(hours: 1));
       print(expiredFromNow.hour);
       Session.setId(value.data!.accessToken.toString());
-      Session.setExpired(expiredFromNow.hour.toString());
+      Session.setExpired(expiredFromNow.hour);
 
 
           var check = await DestinationDatabase.instance.tableIsEmpty();
@@ -66,7 +66,7 @@ class PageBloc extends Bloc<PageEvent, PageState> {
           var expiredFromNow = today.add(const Duration(hours: 1));
           print(expiredFromNow.hour);
           Session.setId(value.data!.accessToken.toString());
-          Session.setExpired(expiredFromNow.hour.toString());
+          Session.setExpired(expiredFromNow.hour);
           var check = await DestinationDatabase.instance.tableIsEmpty();
           if(check! == 0){
           print('token adalah ${value.data!.accessToken.toString()}');
